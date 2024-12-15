@@ -1,5 +1,6 @@
 vendor
 composer.lock
 logs
+coverage
 .env
 .phpunit.result.cache
