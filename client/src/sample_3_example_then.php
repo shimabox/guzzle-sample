@@ -1,6 +1,6 @@
 <?php
 
-namespace Sample;
+namespace App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
