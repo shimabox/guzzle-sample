@@ -12,5 +12,7 @@ FROM composer:2.7 AS composer_base
 FROM base
 COPY --from=composer_base /usr/bin/composer /usr/bin/composer
 
+RUN a2enmod rewrite
+
 EXPOSE 80
 CMD ["apache2-foreground"]
