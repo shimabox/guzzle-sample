@@ -31,8 +31,7 @@ $results = $promises->wait();
 
 // $resultsはPromiseが解決されているので後は好きにしてもろうて
 foreach ($results as $key => $result) {
-    if ($result['state'] === PromiseInterface::FULFILLED
-    ) {
+    if ($result['state'] === PromiseInterface::FULFILLED) {
         echo "$key success" . PHP_EOL;
     } else { // こっちは、PromiseInterface::REJECTED
         echo "$key failed" . PHP_EOL;
