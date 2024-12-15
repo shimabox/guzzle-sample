@@ -35,3 +35,11 @@ Route::get('/sample_4/{id}', function (int $id) {
         'id' => $id,
     ]);
 });
+
+// Guzzle サンプルテスト
+Route::middleware(['throttle:sample_test'])->get('/sample_test/{id}/{name}', function (int $id, string $name) {
+    return response()->json([
+        'id' => $id,
+        'name' => $name,
+    ]);
+});
