@@ -1,0 +1,30 @@
+services:
+  client_nginx:
+    build:
+      context: ./client
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: client_nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - client
+    networks:
+      - app_net
+    volumes:
+      - ./client:/var/www/html
+
+  client:
+    build:
+      context: ./client
+      dockerfile: ./docker/php/Dockerfile
+    container_name: client
+    networks:
+      - app_net
+    expose:
+      - "9000"
+    volumes:
+      - ./client:/var/www/html
+
+networks:
+  app_net:
+    driver: bridge
