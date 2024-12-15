@@ -20,3 +20,11 @@ Route::get('/sample_2/{id}', function ($id) {
         'id' => $id,
     ]);
 });
+
+// Guzzle サンプルその3(非同期リクエスト)
+Route::get('/sample_3/{id}', function ($id) {
+    sleep(1);
+    return response()->json([
+        'id' => $id,
+    ]);
+});
