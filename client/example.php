@@ -1,13 +1,10 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
 
-use Dotenv\Dotenv;
+require_once __DIR__ . '/vendor/autoload.php';
+
 use GuzzleHttp\Client;
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-$baseUrl = getenv('API_BASE_URL') ?: 'http://api';
+$baseUrl = $_ENV['API_BASE_URL'] ?? 'http://api';
 
 $client = new Client([
     'base_uri' => $baseUrl,
