@@ -28,3 +28,10 @@ Route::get('/sample_3/{id}', function ($id) {
         'id' => $id,
     ]);
 });
+
+// Guzzle サンプルその4(非同期リクエスト Pool)
+Route::get('/sample_4/{id}', function ($id) {
+    return response()->json([
+        'id' => $id,
+    ]);
+});
