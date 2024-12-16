@@ -42,7 +42,7 @@ class RateLimitMiddleware
     public function __invoke(callable $handler): callable
     {
         return function (RequestInterface $request, array $options) use ($handler): PromiseInterface {
-            $now = microtime(true);
+            $now = $this->getTime();
 
             // 現在時刻からinterval秒以上前のリクエストはカウント対象外なので除外
             $this->timestamps = array_filter($this->timestamps, fn($t) => $t > $now - $this->interval);
@@ -60,14 +60,36 @@ class RateLimitMiddleware
                 if ($waitTime > 0) {
                     // $waitTime(秒)をマイクロ秒に変換して待機
                     // 0.2秒待ちたいなら0.2*1000000=200000マイクロ秒待つ(もうちょっと係数を増やしてもいいのかもしれない)
-                    usleep((int)($waitTime * 1000000));
+                    // floatをintに暗黙的に変換すると、精度ロスで非推奨(Deprecated)になるので、キャストしている
+                    $this->sleep((int)($waitTime * 1000000));
                 }
             }
 
             // リクエスト時刻を記録
-            $this->timestamps[] = microtime(true);
+            $this->timestamps[] = $this->getTime();
 
             return $handler($request, $options);
         };
+    }
+
+    /**
+     * 現在時刻を返す
+     *
+     * @return float
+     */
+    protected function getTime(): float
+    {
+        return microtime(true);
+    }
+
+    /**
+     * 待機する
+     *
+     * @param int $microseconds 待機時間(マイクロ秒)
+     * @return void
+     */
+    protected function sleep(int $microseconds): void
+    {
+        usleep($microseconds);
     }
 }
