@@ -6,5 +6,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 
 interface RejectedHandlerInterface
 {
-    public function handle(ClientExceptionInterface $e, array $reqParams): void;
+    public function handle(ClientExceptionInterface $e, string $key): void;
+
+    public function getResult(): array;
 }

@@ -7,8 +7,15 @@ use GuzzleHttp\Psr7\Response;
 
 class FulfillHandler implements FulfilledHandlerInterface
 {
-    public function handle(Response $res, array $reqParams): void
+    private array $result = [];
+
+    public function handle(Response $res, string $key): void
     {
-        echo "FulfillHandler: {$res->getBody()}" . PHP_EOL;
+        $this->result[$key] = json_decode($res->getBody()->getContents());
+    }
+
+    public function getResult(): array
+    {
+        return $this->result;
     }
 }

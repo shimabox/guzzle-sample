@@ -31,4 +31,6 @@ $guzzleSample = new GuzzleSample(
     $params,
   3
 );
-$guzzleSample->call();
+$result = $guzzleSample->call();
+
+echo json_encode($result->getResult());

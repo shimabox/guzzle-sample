@@ -19,7 +19,7 @@ readonly class GuzzleSample
         private int $concurrency = 10
     ) {}
 
-    public function call(): void
+    public function call(): Result
     {
         $requests = function ($params) {
             foreach ($params as $key => $param) {
@@ -30,11 +30,13 @@ readonly class GuzzleSample
         $pool = $this->poolFactory->factory($this->client, $requests($this->params),
             [
                 'concurrency' => $this->concurrency,
-                'fulfilled' => fn(Response $res, $key) => $this->fulfilledHandler->handle($res, $this->params[$key]),
-                'rejected' => fn(ClientExceptionInterface $reason, $key) => $this->rejectedHandler->handle($reason, $this->params[$key]),
+                'fulfilled' => fn(Response $res, $key) => $this->fulfilledHandler->handle($res, $key),
+                'rejected' => fn(ClientExceptionInterface $reason, $key) => $this->rejectedHandler->handle($reason, $key),
             ]
         );
         $promise = $pool->promise();
         $promise->wait();
+
+        return new Result($this->fulfilledHandler, $this->rejectedHandler);
     }
 }
