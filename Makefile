@@ -1,18 +1,20 @@
-.PHONY: help setup build up down destroy remake client api
+.PHONY: help setup build up down destroy remake client api client-test client-test-coverage
 
 DOCKER_COMPOSE = docker compose
 
 default: help
 
 help:
-	@echo "make setup   - Build and start containers, initialize client and api"
-	@echo "make build   - Build containers"
-	@echo "make up      - Start containers"
-	@echo "make down    - Stop and remove containers"
-	@echo "make destroy - Stop and remove containers, volumes, and images"
-	@echo "make remake  - Recreate containers, volumes, and images"
-	@echo "make client  - Access client container"
-	@echo "make api     - Access api container"
+	@echo "make setup                - Build and start containers, initialize client and api"
+	@echo "make build                - Build containers"
+	@echo "make up                   - Start containers"
+	@echo "make down                 - Stop and remove containers"
+	@echo "make destroy              - Stop and remove containers, volumes, and images"
+	@echo "make remake               - Recreate containers, volumes, and images"
+	@echo "make client               - Access client container"
+	@echo "make api                  - Access api container"
+	@echo "make client-test          - Run tests in client container"
+	@echo "make client-test-coverage - Run tests in client container with coverage"
 
 setup:
 	@make down
@@ -43,3 +45,9 @@ client:
 
 api:
 	$(DOCKER_COMPOSE) exec api bash
+
+client-test:
+	$(DOCKER_COMPOSE) exec client vendor/bin/phpunit tests/
+
+client-test-coverage:
+	$(DOCKER_COMPOSE) exec client vendor/bin/phpunit --coverage-html coverage tests/
