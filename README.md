@@ -1,5 +1,8 @@
 # guzzle-sample
 
+カオナビ Advent Calendar 2024 16日目のサンプルコードです。  
+[Guzzleと少し仲良くなる](https://zenn.dev/shimabox/articles/d45f26893b7d18 "Guzzleと少し仲良くなる")
+
 ## Installation
 
 1. Clone the repository
