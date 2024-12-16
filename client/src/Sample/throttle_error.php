@@ -29,7 +29,7 @@ $guzzleSample = new GuzzleSample(
     new FulfillHandler(),
     new RejectedHandler(),
     $params,
-  3
+    3
 );
 $result = $guzzleSample->call();
 
