@@ -1,6 +1,7 @@
 # guzzle-sample
 
-カオナビ Advent Calendar 2024 16日目のサンプルコードです。  
+[カオナビ Advent Calendar 2024](https://qiita.com/advent-calendar/2024/kaonavi "株式会社カオナビ - Qiita Advent Calendar 2024 - Qiita") 16日目のサンプルコードです。  
+
 [Guzzleと少し仲良くなる](https://zenn.dev/shimabox/articles/d45f26893b7d18 "Guzzleと少し仲良くなる")
 
 ## Installation
