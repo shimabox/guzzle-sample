@@ -40,7 +40,7 @@ class GuzzleSampleTest extends TestCase
 
         // MockHandlerとHistoryMiddlewareでリクエスト履歴をとる
         $historyContainer = [];
-        $mock_client = $this->createMockClient($queue, $historyContainer);
+        $clientMock = $this->createMockClient($queue, $historyContainer);
 
         // 期待する同時リクエスト数
         $expectedConcurrency = 2;
@@ -60,7 +60,7 @@ class GuzzleSampleTest extends TestCase
          |---------------------
          */
         $sut = new GuzzleSample(
-            client: $mock_client,
+            client: $clientMock,
             poolFactory: $factoryMock,
             fulfilledHandler: new FulfillHandler(),
             rejectedHandler: new RejectedHandler(),
@@ -116,7 +116,7 @@ class GuzzleSampleTest extends TestCase
 
         // MockHandlerとHistoryMiddlewareでリクエスト履歴をとる
         $historyContainer = [];
-        $mock_client = $this->createMockClient($queue, $historyContainer);
+        $clientMock = $this->createMockClient($queue, $historyContainer);
 
         // 期待する同時リクエスト数
         $expectedConcurrency = 2;
@@ -136,7 +136,7 @@ class GuzzleSampleTest extends TestCase
          |---------------------
          */
         $sut = new GuzzleSample(
-            client: $mock_client,
+            client: $clientMock,
             poolFactory: $factoryMock,
             fulfilledHandler: new FulfillHandler(),
             rejectedHandler: new RejectedHandler(),
